@@ -1,0 +1,154 @@
+openapi: 3.0.0
+info:
+  title: Kadaster - Publiekrechtelijke beperkingen
+  description: |
+                De definitie van de Publiekrechtelijke beperkingen endpoints en components.
+  version: "1.3.0"
+paths:
+  /publiekrechtelijkebeperkingen:
+    get:
+      operationId: GetPubliekrechtelijkeBeperkingen
+      description: |
+        Zoeken van de publiekrechtelijke beperkingen op een kadastraal onroerende zaak.
+      parameters:
+        - $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/parameters/fields"
+        - in: query
+          name: kadastraalOnroerendeZaakIdentificatie
+          description: |
+                        De unieke identificatie van een kadastraal onroerende zaak. Gezocht wordt naar publiekrechtelijke beperkingen die rusten op de onroerende zaak
+          required: true
+          schema:
+            type: string
+        - in: query
+          name: grondslagCategorie
+          description: |
+                        Een categorie van grondslaghen (aardaantekeningen). Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/grondslagCategorie.feature
+          required: false
+          schema:
+            $ref: "#/components/schemas/CategorieEnum"
+        - in: query
+          name: inclusiefBeeindigdeBeperkingen
+          description: |
+                        Indien true dan worden ook beperkingen met een datumBeeindiging in het verleden meegeleverd.
+          required: false
+          schema:
+            type: boolean
+      responses:
+        '200':
+          description: |
+                        Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/api_version"
+            warning:
+              $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/headers/warning"
+          content:
+            application/hal+json:
+              schema:
+                $ref: "#/components/schemas/PubliekrechtelijkeBeperkingHalCollectie"
+        '400':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
+        '401':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/401"
+        '403':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/403"
+        '406':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/406"
+        '500':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/500"
+        '503':
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/503"
+      tags:
+      - Publiekrechtelijke Beperkingen
+components:
+  schemas:
+    CategorieEnum:
+      enum:
+        - dwangsom
+        - handhaving
+        - monument
+    PubliekrechtelijkeBeperking:
+      type: "object"
+      description: |
+                    Beperkingen op een kadastraal onroerende zaak die door de overheid zijn opgelegd. Deze bepalen wat een eigenaar wel of niet mag doen met een woning, een ander gebouw of een stuk grond. Het gaat het bijvoorbeeld om beschermde monumenten, natuurmonumenten, bodembescherming, eisen die binnen de Woningwet worden gesteld, of maatregelen die nodig zijn voor landsverdediging.
+      properties:
+        identificatie:
+          type: "string"
+        domein:
+          type: "string"
+          description: |
+                        Het domein waartoe de identificatie behoort.
+        grondslag:
+          $ref: "#/components/schemas/Waardelijst"
+          description: |
+                        Mogelijke waarden zijn te vinden in deze [Waardelijst](http://www.kadaster.nl/schemas/waardelijsten/AardAantekening/)
+        datumInWerking:
+          type: "string"
+          format: "date"
+        datumBeeindiging:
+          type: "string"
+          format: "date"
+        bevoegdGezag:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRK-bevragen/v1.2.0/specificatie/domain.yaml#/components/schemas/NietNatuurlijkPersoonBeperkt"
+#          $ref: "#/components/schemas/NietNatuurlijkPersoonBeperkt"
+        stukIdentificaties:
+          type: "array"
+          description: |
+                        Identificatie van het stuk. Een stuk is een brondocument dat aanleiding geeft
+                        tot een wijziging van de gegevens in een basisregistratie.
+                        Dit kan een aangeboden stuk of een kadasterstuk zijn.
+          items:
+            type: "string"
+        isGebaseerdOpStukdeelIdentificatie:
+          type: "string"
+          description: |
+                        De identificatie van het stukdeel (paragraaf in een akte met een rechtsfeit) waarop deze publiekrechtelijke beperking is gebaseerd.
+        isVermeldInStukdeelIdentificaties:
+          type: "array"
+          description: |
+            De identificaties van de stukdelen (paragrafen in een akte met een rechtsfeit) waarin deze publiekrechtelijke beperking gerechtigde is vermeld.
+          items:
+            type: "string"
+    Waardelijst:
+      type: "object"
+      properties:
+        code:
+          type: "string"
+          minLength: 1
+        waarde:
+          type: "string"
+    PubliekrechtelijkeBeperkingHal:
+      allOf:
+      - $ref: "#/components/schemas/PubliekrechtelijkeBeperking"
+      - properties:
+          _links:
+            $ref: "#/components/schemas/PubliekrechtelijkeBeperkingLinks"
+    PubliekrechtelijkeBeperkingHalCollectie:
+      type: "object"
+      properties:
+        _links:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalCollectionLinks"
+        _embedded:
+          $ref: "#/components/schemas/PubliekrechtelijkeBeperkingHalCollectieEmbedded"
+    PubliekrechtelijkeBeperkingHalCollectieEmbedded:
+      type: "object"
+      properties:
+        publiekrechtelijkeBeperkingen:
+          type: "array"
+          items:
+            $ref: "#/components/schemas/PubliekrechtelijkeBeperkingHal"
+    PubliekrechtelijkeBeperkingLinks:
+      type: "object"
+      properties:
+        bevoegdGezag:
+          $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        stukken:
+          type: "array"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        isGebaseerdOpStukdeel:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        isVermeldInStukdelen:
+          type: "array"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
