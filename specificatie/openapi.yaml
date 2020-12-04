@@ -62,6 +62,22 @@ paths:
       - Publiekrechtelijke Beperkingen
 components:
   schemas:
+    Beperkingsgebied:
+      properties:
+        bagObjectIdentificatie:
+         type: "array"
+         items:
+          type: "string"
+        bgtObjectIdentificatie:
+         type: "array"
+         items:
+          type: "string"
+        kadastraalOnroerendeZaakIdentificaties:
+         type: "array"
+         items:
+          type: "string"
+        vrijeContour:
+          $ref: "#/components/schemas/VrijeContour"
     CategorieEnum:
       enum:
         - dwangsom
@@ -109,6 +125,8 @@ components:
             De identificaties van de stukdelen (paragrafen in een akte met een rechtsfeit) waarin deze publiekrechtelijke beperking gerechtigde is vermeld.
           items:
             type: "string"
+        beperkingsgebied:
+          $ref: "#/components/schemas/Beperkingsgebied"
     Waardelijst:
       type: "object"
       properties:
@@ -152,3 +170,14 @@ components:
           type: "array"
           items:
             $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+        kadastraalOnroerendeZaak:
+          type: "array"
+          items:
+            $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/schemas/HalLink"
+    VrijeContour:
+      type: "object"
+      properties:
+        vlak:
+          $ref: "http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/polygonGeoJSON.yaml"
+        multivlak:
+          $ref: "http://schemas.opengis.net/ogcapi/features/part1/1.0/openapi/schemas/multipolygonGeoJSON.yaml"
