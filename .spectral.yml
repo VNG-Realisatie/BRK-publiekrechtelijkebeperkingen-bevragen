@@ -3,3 +3,4 @@ extends:
 rules:
   oas3-valid-oas-parameter-example: off
   oas3-valid-oas-content-example: off
+  no-$ref-siblings: off
