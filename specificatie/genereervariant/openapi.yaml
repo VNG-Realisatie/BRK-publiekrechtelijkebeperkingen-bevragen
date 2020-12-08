@@ -37,10 +37,12 @@ paths:
       - name: type
         in: query
         description: |
-          Een categorie van grondslaghen (aardaantekeningen). Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/grondslagCategorie.feature
+          Het type publiekrechtelijke beperking, gebaseerd op de grondslagen. Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/typePubliekeBeperking.feature
         required: false
         style: form
         explode: true
+        schema:
+          type: string
       - name: inclusiefBeeindigdeBeperkingen
         in: query
         description: |
@@ -220,7 +222,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/PubliekrechtelijkeBeperkingHalCollectie'
+                $ref: '#/components/schemas/PubliekrechtelijkeBeperkingHal'
         "400":
           description: Bad Request
           headers:
