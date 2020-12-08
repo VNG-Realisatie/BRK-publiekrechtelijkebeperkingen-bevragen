@@ -25,7 +25,7 @@ paths:
                         Een categorie van grondslaghen (aardaantekeningen). Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/grondslagCategorie.feature
           required: false
           schema:
-            string
+            type: "string"
         - in: query
           name: inclusiefBeeindigdeBeperkingen
           description: |
@@ -88,7 +88,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: "#/components/schemas/PubliekrechtelijkeBeperkingHalCollectie"
+                $ref: "#/components/schemas/PubliekrechtelijkeBeperkingHal"
         '400':
           $ref: "https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-common/v1.2.0/api-specificatie/common.yaml#/components/responses/400"
         '401':
