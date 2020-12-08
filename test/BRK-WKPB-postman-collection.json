@@ -1,0 +1,430 @@
+{
+    "item": [
+        {
+            "id": "02664502-80ac-40c3-9a70-ef4d4f74e256",
+            "name": "Get Publiekrechtelijke Beperkingen",
+            "request": {
+                "name": "Get Publiekrechtelijke Beperkingen",
+                "description": {
+                    "content": "Zoeken van de publiekrechtelijke beperkingen op een kadastraal onroerende zaak.\n",
+                    "type": "text/plain"
+                },
+                "url": {
+                    "path": [
+                        "publiekrechtelijkebeperkingen"
+                    ],
+                    "host": [
+                        "{{baseUrl}}"
+                    ],
+                    "query": [
+                        {
+                            "description": "Hiermee kun je de inhoud van de resource naar behoefte aanpassen door een door komma's gescheiden lijst van property namen op te geven. Bij opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven. Wanneer de fields parameter niet is opgegeven, worden alle properties met een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature)",
+                            "key": "fields",
+                            "value": "<string>"
+                        },
+                        {
+                            "description": "(Required) De unieke identificatie van een kadastraal onroerende zaak. Gezocht wordt naar publiekrechtelijke beperkingen die rusten op de onroerende zaak\n",
+                            "key": "kadastraalOnroerendeZaakIdentificatie",
+                            "value": "<string>"
+                        },
+                        {
+                            "description": "Een categorie van grondslaghen (aardaantekeningen). Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/grondslagCategorie.feature\n",
+                            "key": "grondslagCategorie",
+                            "value": "<string>"
+                        },
+                        {
+                            "description": "Indien true dan worden ook beperkingen met een datumBeeindiging in het verleden meegeleverd.\n",
+                            "key": "inclusiefBeeindigdeBeperkingen",
+                            "value": "<boolean>"
+                        }
+                    ],
+                    "variable": []
+                },
+                "method": "GET",
+                "auth": null
+            },
+            "response": [
+                {
+                    "id": "b74f0723-b0f3-4c56-ab5f-377703069eb6",
+                    "name": "Zoekactie geslaagd\n",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "publiekrechtelijkebeperkingen"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "kadastraalOnroerendeZaakIdentificatie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "grondslagCategorie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "inclusiefBeeindigdeBeperkingen",
+                                    "value": "<boolean>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "OK",
+                    "code": 200,
+                    "header": [
+                        {
+                            "description": "",
+                            "key": "api-version",
+                            "value": "1.0.0"
+                        },
+                        {
+                            "description": "",
+                            "key": "warning",
+                            "value": "299 https://service.../api/.../v1 \"Deze versie van de API is verouderd en zal uit dienst worden genomen op 2018-02-01. Raadpleeg voor meer informatie hier de documentatie: https://omgevingswet.../api/.../v1\"."
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/hal+json"
+                        }
+                    ],
+                    "body": "{\n \"_links\": {\n  \"self\": {\n   \"href\": \"https://datapunt.voorbeeldgemeente.nl/api/v{major-versie}/resourcename/{resource-identificatie}\",\n   \"templated\": false,\n   \"title\": \"dolore adipisicing Excepteur proident\"\n  }\n },\n \"_embedded\": {\n  \"publiekrechtelijkeBeperkingen\": [\n   {\n    \"identificatie\": \"in consectetur amet in\",\n    \"domein\": \"aliquip aute\",\n    \"grondslag\": {\n     \"code\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"waarde\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     }\n    },\n    \"datumInWerking\": \"1941-08-07\",\n    \"datumBeeindiging\": \"1951-01-13\",\n    \"bevoegdGezag\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"stukIdentificaties\": [\n     \"Excepteur mollit est reprehenderit\",\n     \"pr\"\n    ],\n    \"isGebaseerdOpStukdeelIdentificatie\": \"adipisicing in enim\",\n    \"isVermeldInStukdeelIdentificaties\": [\n     \"tempor voluptate proident\",\n     \"nostrud\"\n    ],\n    \"beperkingsgebied\": {\n     \"bagObjectIdentificatie\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"bgtObjectIdentificatie\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"kadastraalOnroerendeZaakIdentificaties\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"vrijeContour\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     }\n    },\n    \"_links\": {\n     \"bevoegdGezag\": {\n      \"href\": \"https://datapunt.voorbeeldgemeente.nl/api/v{major-versie}/resourcename/{resource-identificatie}\",\n      \"templated\": true,\n      \"title\": \"ut\"\n     },\n     \"stukken\": [\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n     ],\n     \"isGebaseerdOpStukdeel\": {\n      \"href\": \"https://datapunt.voorbeeldgemeente.nl/api/v{major-versie}/resourcename/{resource-identificatie}\",\n      \"templated\": false,\n      \"title\": \"laboris ex Duis\"\n     },\n     \"isVermeldInStukdelen\": [\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n     ],\n     \"kadastraalOnroerendeZaak\": [\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n     ]\n    }\n   },\n   {\n    \"identificatie\": \"laboris cupidatat pariatur exercitation\",\n    \"domein\": \"labore exercitation est minim\",\n    \"grondslag\": {\n     \"code\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"waarde\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     }\n    },\n    \"datumInWerking\": \"2015-11-08\",\n    \"datumBeeindiging\": \"1952-06-04\",\n    \"bevoegdGezag\": {\n     \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n    },\n    \"stukIdentificaties\": [\n     \"cillum aute\",\n     \"qui\"\n    ],\n    \"isGebaseerdOpStukdeelIdentificatie\": \"quis labore\",\n    \"isVermeldInStukdeelIdentificaties\": [\n     \"proident enim\",\n     \"elit tempor\"\n    ],\n    \"beperkingsgebied\": {\n     \"bagObjectIdentificatie\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"bgtObjectIdentificatie\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"kadastraalOnroerendeZaakIdentificaties\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     },\n     \"vrijeContour\": {\n      \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n     }\n    },\n    \"_links\": {\n     \"bevoegdGezag\": {\n      \"href\": \"https://datapunt.voorbeeldgemeente.nl/api/v{major-versie}/resourcename/{resource-identificatie}\",\n      \"templated\": true,\n      \"title\": \"cupidatat Duis nostrud nisi minim\"\n     },\n     \"stukken\": [\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n     ],\n     \"isGebaseerdOpStukdeel\": {\n      \"href\": \"https://datapunt.voorbeeldgemeente.nl/api/v{major-versie}/resourcename/{resource-identificatie}\",\n      \"templated\": true,\n      \"title\": \"ipsum ut Lorem aute consequat\"\n     },\n     \"isVermeldInStukdelen\": [\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n     ],\n     \"kadastraalOnroerendeZaak\": [\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      },\n      {\n       \"value\": \"<Error: Too many levels of nesting to fake this schema>\"\n      }\n     ]\n    }\n   }\n  ]\n }\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "4fa6ff93-b5bc-49c5-954e-536903cb26d9",
+                    "name": "Bad Request",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "publiekrechtelijkebeperkingen"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "kadastraalOnroerendeZaakIdentificatie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "grondslagCategorie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "inclusiefBeeindigdeBeperkingen",
+                                    "value": "<boolean>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Bad Request",
+                    "code": 400,
+                    "header": [
+                        {
+                            "description": "",
+                            "key": "api-version",
+                            "value": "1.0.0"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/problem+json"
+                        }
+                    ],
+                    "body": "{\n \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1\",\n \"title\": \"Ten minste één parameter moet worden opgegeven.\",\n \"status\": 400,\n \"detail\": \"The request could not be understood by the server due to malformed syntax. The client SHOULD NOT repeat the request without modification.\",\n \"instance\": \"https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde\",\n \"code\": \"paramsRequired\",\n \"invalidParams\": [\n  {\n   \"type\": \"https://www.vng.nl/realisatie/api/validaties/integer\",\n   \"name\": \"verblijfplaats__huisnummer\",\n   \"code\": \"integer\",\n   \"reason\": \"Waarde is geen geldige integer.\"\n  }\n ]\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "6e7402a8-5c94-4d9c-87e3-57b800cc2dff",
+                    "name": "Unauthorized",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "publiekrechtelijkebeperkingen"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "kadastraalOnroerendeZaakIdentificatie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "grondslagCategorie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "inclusiefBeeindigdeBeperkingen",
+                                    "value": "<boolean>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Unauthorized",
+                    "code": 401,
+                    "header": [
+                        {
+                            "description": "",
+                            "key": "api-version",
+                            "value": "1.0.0"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/problem+json"
+                        }
+                    ],
+                    "body": "{\n \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2\",\n \"title\": \"Niet correct geauthenticeerd.\",\n \"status\": 401,\n \"detail\": \"The request requires user authentication. The response MUST include a WWW-Authenticate header field (section 14.47) containing a challenge applicable to the requested resource.\",\n \"instance\": \"https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde\",\n \"code\": \"authentication\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "89c7c6e5-1ee7-4473-9018-26c337ce1c4b",
+                    "name": "Forbidden",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "publiekrechtelijkebeperkingen"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "kadastraalOnroerendeZaakIdentificatie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "grondslagCategorie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "inclusiefBeeindigdeBeperkingen",
+                                    "value": "<boolean>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Forbidden",
+                    "code": 403,
+                    "header": [
+                        {
+                            "description": "",
+                            "key": "api-version",
+                            "value": "1.0.0"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/problem+json"
+                        }
+                    ],
+                    "body": "{\n \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4\",\n \"title\": \"U bent niet geautoriseerd voor deze operatie.\",\n \"status\": 403,\n \"detail\": \"The server understood the request, but is refusing to fulfill it.\",\n \"instance\": \"https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde\",\n \"code\": \"autorisation\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "a1cfcab9-282d-4a7e-ae7d-0016d350a4a9",
+                    "name": "Not Acceptable",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "publiekrechtelijkebeperkingen"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "kadastraalOnroerendeZaakIdentificatie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "grondslagCategorie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "inclusiefBeeindigdeBeperkingen",
+                                    "value": "<boolean>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Not Acceptable",
+                    "code": 406,
+                    "header": [
+                        {
+                            "description": "",
+                            "key": "api-version",
+                            "value": "1.0.0"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/problem+json"
+                        }
+                    ],
+                    "body": "{\n \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7\",\n \"title\": \"Gevraagde contenttype wordt niet ondersteund.\",\n \"status\": 406,\n \"detail\": \"The resource identified by the request is only capable of generating response entities which have content characteristics not acceptable according to thr accept headers sent in the request\",\n \"instance\": \"https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde\",\n \"code\": \"notAcceptable\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "466d9408-1464-4584-bba7-fe6dd37eedca",
+                    "name": "Internal Server Error",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "publiekrechtelijkebeperkingen"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "kadastraalOnroerendeZaakIdentificatie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "grondslagCategorie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "inclusiefBeeindigdeBeperkingen",
+                                    "value": "<boolean>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Internal Server Error",
+                    "code": 500,
+                    "header": [
+                        {
+                            "description": "",
+                            "key": "api-version",
+                            "value": "1.0.0"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/problem+json"
+                        }
+                    ],
+                    "body": "{\n \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.1\",\n \"title\": \"Interne server fout.\",\n \"status\": 500,\n \"detail\": \"The server encountered an unexpected condition which prevented it from fulfilling the request.\",\n \"instance\": \"https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde\",\n \"code\": \"serverError\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                },
+                {
+                    "id": "66eadad5-1fad-4877-8361-79726432d1d8",
+                    "name": "Service Unavailable",
+                    "originalRequest": {
+                        "url": {
+                            "path": [
+                                "publiekrechtelijkebeperkingen"
+                            ],
+                            "host": [
+                                "{{baseUrl}}"
+                            ],
+                            "query": [
+                                {
+                                    "key": "fields",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "kadastraalOnroerendeZaakIdentificatie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "grondslagCategorie",
+                                    "value": "<string>"
+                                },
+                                {
+                                    "key": "inclusiefBeeindigdeBeperkingen",
+                                    "value": "<boolean>"
+                                }
+                            ],
+                            "variable": []
+                        },
+                        "method": "GET",
+                        "body": {}
+                    },
+                    "status": "Service Unavailable",
+                    "code": 503,
+                    "header": [
+                        {
+                            "description": "",
+                            "key": "api-version",
+                            "value": "1.0.0"
+                        },
+                        {
+                            "key": "Content-Type",
+                            "value": "application/problem+json"
+                        }
+                    ],
+                    "body": "{\n \"type\": \"https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4\",\n \"title\": \"Bronservice {bron} is tijdelijk niet beschikbaar.\",\n \"status\": 503,\n \"detail\": \"The service is currently unable to handle the request due to a temporary overloading or maintenance of the server.\",\n \"instance\": \"https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde\",\n \"code\": \"notAvailable\"\n}",
+                    "cookie": [],
+                    "_postman_previewlanguage": "json"
+                }
+            ],
+            "event": []
+        }
+    ],
+    "event": [],
+    "variable": [
+        {
+            "id": "baseUrl",
+            "type": "string",
+            "value": "/"
+        }
+    ],
+    "info": {
+        "_postman_id": "0677efa9-8fdc-4b3c-963f-5dc6432b360e",
+        "name": "Kadaster - Publiekrechtelijke beperkingen",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": {
+            "content": "De definitie van de Publiekrechtelijke beperkingen endpoints en components.\n",
+            "type": "text/plain"
+        }
+    }
+}
