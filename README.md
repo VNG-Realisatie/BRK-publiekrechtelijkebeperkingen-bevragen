@@ -6,9 +6,9 @@ E
 
 
 ## Documentatie
-* [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) en in [Swagger-formaat](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-WKPB-bevragen/master/specificatie/openapi.yaml)
+* [Technische specificaties](./specificatie) (Open API Specificaties en JSON schema) en in [Swagger-formaat](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRK-WKPB/main/specificatie/genereervariant/openapi.yaml)
 
-Hier kan je de specificaties van [Develop in swagger-formaat](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRP-WKPB-bevragen/develop/specificatie/openapi.yaml) raadplegen.
+Hier kan je de specificaties van [Develop in swagger-formaat](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRK-WKPB/develop/specificatie/openapi.yaml) raadplegen.
 
 
 
