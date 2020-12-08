@@ -6,7 +6,7 @@ E
 
 
 ## Documentatie
-Hier kan je de specificaties van [Develop in swagger-formaat](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRK-WKPB/develop/specificatie/openapi.yaml) raadplegen.
+Hier kan je de specificaties van [Develop in swagger-formaat](https://petstore.swagger.io/?url=https://raw.githubusercontent.com/VNG-Realisatie/Haal-Centraal-BRK-WKPB/develop/specificatie/genereervariant/openapi.yaml) raadplegen.
 
 
 
