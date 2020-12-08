@@ -22,7 +22,7 @@ paths:
         - in: query
           name: type
           description: |
-                        Een categorie van grondslaghen (aardaantekeningen). Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/grondslagCategorie.feature
+                        Het type publiekrechtelijke beperking, gebaseerd op de grondslagen. Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/typePubliekeBeperking.feature
           required: false
           schema:
             type: "string"
