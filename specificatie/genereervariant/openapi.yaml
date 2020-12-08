@@ -41,6 +41,8 @@ paths:
         required: false
         style: form
         explode: true
+        schema:
+          type: string
       - name: inclusiefBeeindigdeBeperkingen
         in: query
         description: |
@@ -220,7 +222,7 @@ paths:
           content:
             application/hal+json:
               schema:
-                $ref: '#/components/schemas/PubliekrechtelijkeBeperkingHalCollectie'
+                $ref: '#/components/schemas/PubliekrechtelijkeBeperkingHal'
         "400":
           description: Bad Request
           headers:
