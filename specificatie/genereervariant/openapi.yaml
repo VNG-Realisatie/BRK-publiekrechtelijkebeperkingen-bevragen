@@ -3,7 +3,7 @@ info:
   title: Kadaster - Publiekrechtelijke beperkingen
   description: |
     De definitie van de Publiekrechtelijke beperkingen endpoints en components.
-  version: 1.3.0
+  version: 0.9.0
 servers:
 - url: /
 paths:
@@ -12,7 +12,7 @@ paths:
       tags:
       - Publiekrechtelijke Beperkingen
       description: |
-        Zoeken van de publiekrechtelijke beperkingen op een kadastraal onroerende zaak.
+        Zoek publiekrechtelijke beperkingen op een kadastraal onroerende zaak.
       operationId: GetPubliekrechtelijkeBeperkingen
       parameters:
       - name: fields
@@ -37,12 +37,12 @@ paths:
       - name: type
         in: query
         description: |
-          Het type publiekrechtelijke beperking, gebaseerd op de grondslagen. Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie ./features/typePubliekeBeperking.feature
+          Het type publiekrechtelijke beperking, gebaseerd op de grondslagen. Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie de specificatie voor het [type publiekrechtelijke beperking](https://github.com/VNG-Realisatie/Haal-Centraal-BRK-WKPB/blob/develop/features/type-publiekerechtelijke-beperking.feature)).
         required: false
         style: form
         explode: true
         schema:
-          type: string
+          $ref: '#/components/schemas/TypeEnum'
       - name: inclusiefBeeindigdeBeperkingen
         in: query
         description: |
@@ -140,6 +140,221 @@ paths:
                   not acceptable according to thr accept headers sent in the request
                 instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
                 code: notAcceptable
+        "501":
+          description: Not Implemented
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.2
+                title: Not Implemented
+                status: 501
+                detail: The server does not support the functionality required to
+                  fulfill the request.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notImplemented
+        "503":
+          description: Service Unavailable
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.5.4
+                title: Bronservice {bron} is tijdelijk niet beschikbaar.
+                status: 503
+                detail: The service is currently unable to handle the request due
+                  to a temporary overloading or maintenance of the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAvailable
+        default:
+          description: Er is een onverwachte fout opgetreden
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+    post:
+      tags:
+      - Publiekrechtelijke Beperkingen
+      description: |
+        Zoek publiekrechtelijke beperkingen binnen een contour.
+      operationId: ZoekPubliekrechtelijkeBeperkingenBinnenContour
+      parameters:
+      - name: Content-Crs
+        in: header
+        description: CRS van de meegegeven geometrie. epsg:28992 mapt op het RD New
+          Nederlands coordinatenstelsel.
+        required: false
+        schema:
+          type: string
+          enum:
+          - epsg:28992
+      - name: fields
+        in: query
+        description: Hiermee kun je de inhoud van de resource naar behoefte aanpassen
+          door een door komma's gescheiden lijst van property namen op te geven. Bij
+          opgave van niet-bestaande properties wordt een 400 Bad Request teruggegeven.
+          Wanneer de fields parameter niet is opgegeven, worden alle properties met
+          een waarde teruggegeven. Zie [functionele specificaties](https://github.com/VNG-Realisatie/Haal-Centraal-common/blob/v1.2.0/features/fields.feature)
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: |
+          Het type publiekrechtelijke beperking, gebaseerd op de grondslagen. Bijvoorbeeld om op alle privaatrechtelijkebeperkingen met een grondslag die iets met monumenten te maken heeft (16 grondslagen) te kunnen selecteren. (Zie de specificatie voor het [type publiekrechtelijke beperking](https://github.com/VNG-Realisatie/Haal-Centraal-BRK-WKPB/blob/develop/features/type-publiekerechtelijke-beperking.feature)).
+        required: false
+        style: form
+        explode: true
+        schema:
+          $ref: '#/components/schemas/TypeEnum'
+      - name: inclusiefBeeindigdeBeperkingen
+        in: query
+        description: |
+          Indien true dan worden ook beperkingen met een datumBeeindiging in het verleden meegeleverd.
+        required: false
+        style: form
+        explode: true
+        schema:
+          type: boolean
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/polygonGeoJSON'
+      responses:
+        "200":
+          description: |
+            Zoekactie geslaagd
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+            warning:
+              $ref: '#/components/headers/warning'
+          content:
+            application/hal+json:
+              schema:
+                $ref: '#/components/schemas/PubliekrechtelijkeBeperkingHalCollectie'
+        "400":
+          description: Bad Request
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/BadRequestFoutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.1
+                title: Ten minste één parameter moet worden opgegeven.
+                status: 400
+                detail: The request could not be understood by the server due to malformed
+                  syntax. The client SHOULD NOT repeat the request without modification.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: paramsRequired
+                invalidParams:
+                - type: https://www.vng.nl/realisatie/api/validaties/integer
+                  name: verblijfplaats__huisnummer
+                  code: integer
+                  reason: Waarde is geen geldige integer.
+        "401":
+          description: Unauthorized
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.2
+                title: Niet correct geauthenticeerd.
+                status: 401
+                detail: The request requires user authentication. The response MUST
+                  include a WWW-Authenticate header field (section 14.47) containing
+                  a challenge applicable to the requested resource.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: authentication
+        "403":
+          description: Forbidden
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.4
+                title: U bent niet geautoriseerd voor deze operatie.
+                status: 403
+                detail: The server understood the request, but is refusing to fulfill
+                  it.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: autorisation
+        "406":
+          description: Not Acceptable
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.7
+                title: Gevraagde contenttype wordt niet ondersteund.
+                status: 406
+                detail: The resource identified by the request is only capable of
+                  generating response entities which have content characteristics
+                  not acceptable according to thr accept headers sent in the request
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: notAcceptable
+        "412":
+          description: Precondition failed
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.13
+                title: Precondition Failed
+                status: 412
+                detail: The precondition given in one or more of the request-header
+                  fields evaluated to false when it was tested on the server.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: preconditionFailed
+        "415":
+          description: Unsupported Media Type
+          headers:
+            api-version:
+              $ref: '#/components/headers/api_version'
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/Foutbericht'
+              example:
+                type: https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html#sec10.4.16
+                title: Unsupported Media Type
+                status: 415
+                detail: The server is refusing the request because the entity of the
+                  request is in a format not supported by the requested resource for
+                  the requested method.
+                instance: https://datapunt.voorbeeldgemeente.nl/api/v1/resourcenaam?parameter=waarde
+                code: unsupported
         "501":
           description: Not Implemented
           headers:
@@ -359,6 +574,12 @@ paths:
                 $ref: '#/components/schemas/Foutbericht'
 components:
   schemas:
+    TypeEnum:
+      type: string
+      enum:
+      - dwangsom
+      - handhaving
+      - monument
     Beperkingsgebied:
       properties:
         bagObjectIdentificatie:
@@ -420,6 +641,7 @@ components:
           $ref: '#/components/schemas/Beperkingsgebied'
       description: |
         Beperkingen op een kadastraal onroerende zaak die door de overheid zijn opgelegd. Deze bepalen wat een eigenaar wel of niet mag doen met een woning, een ander gebouw of een stuk grond. Het gaat het bijvoorbeeld om beschermde monumenten, natuurmonumenten, bodembescherming, eisen die binnen de Woningwet worden gesteld, of maatregelen die nodig zijn voor landsverdediging.
+          Mogelijke waarden voor grondslag zijn te vinden in de waardelijst [grondslag publiekrechtelijke beperking](https://developer.kadaster.nl/schemas/waardelijsten/GrondslagBRK-PB/index.html).
     Waardelijst:
       type: object
       properties:
@@ -531,6 +753,26 @@ components:
           description: Beschrijving van de fout op de parameterwaarde
           example: Waarde is geen geldige integer.
       description: Details over fouten in opgegeven parameters
+    polygonGeoJSON:
+      required:
+      - coordinates
+      - type
+      type: object
+      properties:
+        type:
+          type: string
+          enum:
+          - Polygon
+        coordinates:
+          type: array
+          items:
+            minItems: 4
+            type: array
+            items:
+              minItems: 2
+              type: array
+              items:
+                type: number
     NietNatuurlijkPersoonBeperkt:
       allOf:
       - $ref: '#/components/schemas/PersoonBasis'
@@ -584,26 +826,6 @@ components:
     Href:
       type: string
       example: https://datapunt.voorbeeldgemeente.nl/api/v{major-versie}/resourcename/{resource-identificatie}
-    polygonGeoJSON:
-      required:
-      - coordinates
-      - type
-      type: object
-      properties:
-        type:
-          type: string
-          enum:
-          - Polygon
-        coordinates:
-          type: array
-          items:
-            minItems: 4
-            type: array
-            items:
-              minItems: 2
-              type: array
-              items:
-                type: number
     multipolygonGeoJSON:
       required:
       - coordinates
