@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "unstage-generated": "git reset HEAD ./specificatie/genereervariant/openapi.* ./test/BRK-Bevragen-postman-collection.json ./code/**",
-    "rollback-generated": "git checkout ./specificatie/genereervariant/openapi.* ./test/BRK-Bevragen-postman-collection.json ./code/**",
+    "rollback-generated": "git checkout ./specificatie/genereervariant/openapi.* ./test/BRK-Bevragen-postman-collection.json ./code/**"
   },
   "repository": {
     "type": "git",
