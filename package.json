@@ -4,17 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "oas:generate-client": "openapi-generator-cli generate -i ./specificatie/genereervariant/openapi.yaml --global-property=modelTests=false,apiTests=false,modelDocs=false,apiDocs=false",
-    "oas:generate-java-client": "npm run oas:generate-client -- -o ./code/java -g java --additional-properties=dateLibrary=java8,java8=true,optionalProjectFile=false,optionalAssemblyInfo=false",
-    "oas:generate-netcore-client": "npm run oas:generate-client -- -o ./code/netcore -g csharp-netcore --additional-properties=optionalProjectFile=false,optionalAssemblyInfo=false",
-    "oas:generate-net-client": "npm run oas:generate-client -- -o ./code/net -g csharp --additional-properties=optionalProjectFile=false,optionalAssemblyInfo=false",
-    "oas:generate-python-client": "npm run oas:generate-client -- -o ./code/python -g python --additional-properties=optionalProjectFile=false,optionalAssemblyInfo=false",
-    "oas:generate-postman-collection": "openapi2postmanv2 -s ./specificatie/genereervariant/openapi.yaml -o ./test/BRK-WKPB-postman-collection.json --pretty",
-    "oas:lint": "spectral lint ./specificatie/openapi.yaml",
-    "oas:lint-genereervariant": "spectral lint ./specificatie/genereervariant/openapi.yaml",
-    "preoas:resolve": "mvn-dl io.swagger.codegen.v3:swagger-codegen-cli:3.0.19 -f swagger-codegen-cli.jar",
-    "oas:resolve": "java -jar swagger-codegen-cli.jar generate -i ./specificatie/openapi.yaml -l openapi-yaml -o ./specificatie/genereervariant && java -jar swagger-codegen-cli.jar generate -i ./specificatie/openapi.yaml -l openapi -o ./specificatie/genereervariant",
-    "postoas:resolve": "rm swagger-codegen-cli.jar",
+    "unstage-generated": "git reset HEAD ./specificatie/genereervariant/openapi.* ./test/BRK-Bevragen-postman-collection.json ./code/**",
+    "rollback-generated": "git checkout ./specificatie/genereervariant/openapi.* ./test/BRK-Bevragen-postman-collection.json ./code/**",
   },
   "repository": {
     "type": "git",
@@ -36,7 +27,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "npm run oas:lint && npm run oas:resolve && npm run oas:lint-genereervariant && npm run unstage-generated",
+      "pre-commit": "npm run unstage-generated",
       "post-commit": "npm run rollback-generated"
     }
   }
