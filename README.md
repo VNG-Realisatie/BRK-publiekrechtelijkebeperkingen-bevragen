@@ -19,9 +19,10 @@ Deze API is in eerste instantie ontwikkeld op https://github.com/VNG-Realisatie/
 ## Bronnen
 * [Landelijke API strategie voor de overheid](https://geonovum.github.io/KP-APIs/)
 
-## Contactpersonen:
-* Product owner: CathyDingemanse [c.dingemanse@comites.nl](mailto:c.dingemanse@comites.nl)
-* Berichtontwerper: JohanBoer [johan.boer@vng.nl](mailto:johan.boer@vng.nl)
+## Contact
+<!--* Product owner: CathyDingemanse [c.dingemanse@comites.nl](mailto:c.dingemanse@comites.nl)
+* Berichtontwerper: JohanBoer [johan.boer@vng.nl](mailto:johan.boer@vng.nl)-->
+[VNG Ondersteuning standaarden](mailto:ondersteuning.standaarden@vng.nl)
 
 ## Licentie
 Copyright &copy; VNG Realisatie 2020
