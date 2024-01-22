@@ -1,5 +1,7 @@
 # BRK-publiekrechtelijkebeperkingen-bevragen
 
+**Aangezien deze API tot nader order niet door het Kadaster zal woren aangeboden wordt hij gearchiveerd.**
+
 BRK-publiekrechtelijkebeperkingen-bevragen is een Haal Centraal API voor het ontsluiten van Publiekrechtelijke beperkingen bij het Kadaster.
 E
 ## Getting started
